@@ -30,6 +30,37 @@ public class Snake {
     }
 }
 
+
+class SnakeGame extends JPanel implements ActionListener , KeyListener {
+    
+    private class Tile{
+        int x;
+        int y;
+       
+        Tile(int x, int y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+    int boardWidth ;
+    int boardHeight;
+    int tileSize = 25;
+    
+    //snake
+    Tile snakeHead;
+    ArrayList <Tile> snakeBody;
+    
+    //food
+    Tile food;
+    
+    // game logic
+    
+    Timer gameLoop;
+    int velocityX;
+    int velocityY;
+    boolean gameOver = false; 
+    Random random;
+    
 SnakeGame (int boardWidth, int boardHeight)  {
     this.boardWidth = boardWidth;
     this.boardHeight = boardHeight;
@@ -56,28 +87,29 @@ SnakeGame (int boardWidth, int boardHeight)  {
         super.paintComponent(graph);
         draw(graph);
     }
- public void draw (Graphics graph){
-     /*   //grid
+    
+    public void draw (Graphics graph){
+    // grid
         for(int i =0; i< boardWidth/tileSize; i++){
             graph.drawLine(i * tileSize, 0, i* tileSize, boardHeight); //vertical
             graph.drawLine(0, i * tileSize, boardWidth, i * tileSize); // horizontal
         }
-        //food
-      */  
+        
+       
         graph.setColor(Color.red);
-        //graph.fillOval(food.x * tileSize, food.y * tileSize, tileSize, tileSize);
-        graph.fill3DRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize, true);
+        graph.fillOval(food.x * tileSize, food.y * tileSize, tileSize, tileSize);
+        //graph.fill3DRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize, true);
         
         //snake head       
         graph.setColor(Color.green);
-       // graph.fillRect(snakeHead.x * tileSize, snakeHead.y *tileSize , tileSize,tileSize);
-        graph.fill3DRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize, true);
+        graph.fillRect(snakeHead.x * tileSize, snakeHead.y *tileSize , tileSize,tileSize);
+        //graph.fill3DRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize, true);
    
         //snake Body
         for (int i = 0; i < snakeBody.size(); i++) {
             Tile snakePart = snakeBody.get(i);
-           //graph.fillOval(snakePart.x * tileSize, snakePart.y * tileSize , tileSize , tileSize);
-           graph.fill3DRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize, true);
+           graph.fillOval(snakePart.x * tileSize, snakePart.y * tileSize , tileSize , tileSize);
+           //graph.fill3DRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize, true);
 
         }
         
