@@ -30,3 +30,30 @@ public class Snake {
     }
 }
 
+SnakeGame (int boardWidth, int boardHeight)  {
+    this.boardWidth = boardWidth;
+    this.boardHeight = boardHeight;
+    
+    setPreferredSize(new Dimension(this.boardWidth, this.boardHeight));
+    setBackground(Color.black);
+    addKeyListener(this);
+    setFocusable(true);
+    
+    snakeHead = new Tile (5,5);
+    snakeBody = new ArrayList <Tile > ();
+    food = new Tile (10,10);
+    random = new Random();
+    placeFood();
+    
+    velocityX = 0;
+    velocityY = 1;
+    
+    gameLoop = new Timer(250,this);
+    gameLoop.start();
+    } 
+
+    public void paintComponent(Graphics graph){
+        super.paintComponent(graph);
+        draw(graph);
+    }
+
